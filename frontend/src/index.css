@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.low {
+  @apply text-green-400;
+}
+.midium {
+  @apply text-yellow-400;
+}
+
+.high {
+  @apply text-red-400;
+}
+
+.navy {
+  @apply translate-x-0;
+}
+
+.active {
+  @apply text-[#AD28FF] flex items-center gap-x-1;
+}
+
+html {
+  font-family: "Inter", sans-serif;
+  
+}
