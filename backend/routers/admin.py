@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status,Path
 
-import models
-import schemas
+
 # dependency start
 
 from sqlalchemy.orm import Session
-from database import  SessionLocal
+from backend import models
+from backend.database import  SessionLocal
 from typing import Annotated
 from .auth import get_current_user
 
@@ -39,7 +39,7 @@ async def get_all_todos1(user: user_dependency, db: db_dependency):
 
 
 @router.delete('/delete{todo_id}')
-async def  delete_todo(user: user_dependency, db: db_dependency, todo_id: int = Annotated[...,Path(gt=0)]):
+async def  delete_todo(user: user_dependency, db: db_dependency, todo_id: int = Path(..., gt=0)):
     if not user or user.get('role') != 'admin':
          raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="authentication field")
     todo_model = db.query(models.Todos).filter(models.Todos.id == todo_id)

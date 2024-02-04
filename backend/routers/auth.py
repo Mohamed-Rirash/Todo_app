@@ -1,7 +1,7 @@
 from fastapi import APIRouter,Depends, status,HTTPException
-import schemas,models
+from backend import schemas,models
 from passlib.context import CryptContext
-from database import SessionLocal
+from backend.database import SessionLocal
 from typing import Annotated
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm,OAuth2PasswordBearer
