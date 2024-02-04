@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status,Path
 
-import models
-import schemas
+
 # dependency start
 
 from sqlalchemy.orm import Session
-from database import  SessionLocal
+from backend import models, schemas
+from backend.database import  SessionLocal
 from typing import Annotated
 from .auth import get_current_user
 
