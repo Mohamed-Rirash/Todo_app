@@ -1,7 +1,19 @@
-
-
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useSelector } from "react-redux";
+const API_KEY = "http://127.0.0.1:8000";
 function Tasks() {
-
+  const {token} = useSelector((state) => state.auth)
+  const {} = useQuery({
+    queryfn: async () => {
+      const {data} = await axios.get(`${API_KEY}/todos`,{
+        headers:{
+          "Accept":"application/json",
+          "Authorization": `Bearer${token}`
+        }
+      })
+    },
+  });
 
   return (
     <div>
