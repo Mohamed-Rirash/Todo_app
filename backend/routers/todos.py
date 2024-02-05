@@ -75,10 +75,9 @@ async def update_todo(user: user_dependency, db: db_dependency,
         db.add(todo_model)
         db.commit()
 
-@router.delete("/todo/{todo_id}",status_code=status.HTTP_200_OK)
 async def delete_todo(db: db_dependency,
                       user: user_dependency,
-                      todorequest: schemas.TodoRequest, 
+                       
                       todo_id: int = Path(..., description="ID of the todo item you want to Delete")):
         if user is None:
              raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="authentiaction filled")
