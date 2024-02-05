@@ -1,28 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import Card from "../components/Card";
-
-const API_KEY = "http://127.0.0.1:8000";
+import { getTodos } from "../api/todosApi";
 
 function Tasks() {
-  const { token } = useSelector((state) => state.auth);
-  const headers = {
-    accept: "application/json",
-    Authorization: `Bearer ${token}`,
-  };
-  const { data } = useQuery({
+  const token = useSelector((state) => state.auth.token);
+  const { data, isLoading } = useQuery({
     queryKey: ["todos"],
-    queryFn: async () => {
-      const { data } = await axios.get(`${API_KEY}/todos/`, {
-        headers,
-      });
-      return data;
-    },
+    queryFn: () => getTodos(token),
   });
-
-  console.log("you", data);
-
+  console.log("query", data);
   return (
     <div>
       <div className="flex justify-between sm:px-20 py-6">
@@ -38,7 +25,9 @@ function Tasks() {
           </button>
         </div>
       </div>
-      {data ? (
+      {isLoading ? (
+        <p>Loadin.....</p>
+      ) : data ? (
         data.map((todo) => (
           <Card
             key={todo.id}

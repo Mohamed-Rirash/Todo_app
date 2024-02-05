@@ -25,7 +25,7 @@ const login = async (userData) => {
     sessionStorage.setItem("expires_at", expires_at);
   }
 
-  return response.data;
+  return response.data.access_token;
 };
 
 
